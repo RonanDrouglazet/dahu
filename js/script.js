@@ -10,8 +10,10 @@
     })
 
     const logoBlackOffset = $('.main.container .logo').offset()
-    $('.showroom .logo').css({
-        top: logoBlackOffset.top,
-        left: logoBlackOffset.left
-    })
+    setInterval(() => {
+        $('.showroom .logo').css({
+            top: logoBlackOffset.top,
+            left: logoBlackOffset.left
+        })
+    }, 500)
 })()
