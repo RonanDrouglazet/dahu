@@ -19,5 +19,6 @@
 
     setInterval(placeLogo, 100)
     placeLogo()
-    $('.showroom .logo').fadeIn()
+    $('.showroom .logo').fadeOut(0)
+    $('.showroom .logo').fadeIn(500)
 })()
