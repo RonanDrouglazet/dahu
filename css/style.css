@@ -1,0 +1,28 @@
+.realisation img {
+    width: 100%;
+}
+
+.realisation .col-sm-4, .menu {
+    padding: 15px;
+}
+
+.main.container, img.logo {
+    max-width: 95%;
+}
+
+.showroom {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    background-position: center;
+    background-size: cover;
+    z-index: 2;
+    cursor: pointer;
+}
+
+.showroom .logo {
+    position: fixed;
+}
