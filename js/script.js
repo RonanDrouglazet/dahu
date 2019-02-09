@@ -9,11 +9,14 @@
         $('.showroom').fadeOut()
     })
 
-    const logoBlackOffset = $('.main.container .logo').offset()
-    setInterval(() => {
+    function placeLogo() {
+        const logoBlackOffset = $('.main.container .logo').offset()
         $('.showroom .logo').css({
             top: logoBlackOffset.top,
             left: logoBlackOffset.left
         })
-    }, 500)
+    }
+
+    setInterval(placeLogo, 500)
+    placeLogo()
 })()
