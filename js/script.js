@@ -17,6 +17,7 @@
         })
     }
 
-    setInterval(placeLogo, 500)
+    setInterval(placeLogo, 100)
     placeLogo()
+    $('.showroom .logo').fadeIn()
 })()

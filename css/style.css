@@ -25,4 +25,5 @@
 
 .showroom .logo {
     position: fixed;
+    opacity: 0;
 }
