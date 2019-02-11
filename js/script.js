@@ -10,11 +10,14 @@
     })
 
     function placeLogo() {
-        const logoBlackOffset = $('.main.container .logo').offset()
+        const blackLogo = $('.main.container .logo')
+        const logoBlackOffset = blackLogo.offset()
         $('.showroom .logo').css({
             top: logoBlackOffset.top,
-            left: logoBlackOffset.left
+            left: logoBlackOffset.left,
+
         })
+        $('.showroom .logo img').css('width', blackLogo.width() + 'px')
     }
 
     setInterval(placeLogo, 100)

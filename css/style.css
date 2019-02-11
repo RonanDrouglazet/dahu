@@ -2,8 +2,16 @@
     width: 100%;
 }
 
-.realisation .col-sm-4, .menu {
-    padding: 15px;
+.realisation .col-sm-4 {
+    padding: 5px;
+}
+
+.menu {
+    padding-left: 2.5%;
+}
+
+.main.container {
+    padding-top: 2vh;
 }
 
 .main.container, img.logo {
@@ -25,4 +33,9 @@
 
 .showroom .logo {
     position: fixed;
+}
+
+.content {
+    max-height: 98vh;
+    overflow: scroll;
 }
