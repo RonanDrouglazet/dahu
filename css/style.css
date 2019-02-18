@@ -39,3 +39,45 @@
     max-height: 98vh;
     overflow: scroll;
 }
+
+.rea {
+    position: relative;
+}
+
+.rea-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    opacity: 0;
+    transition: opacity .3s ease-in-out;
+    background: rgba(0,0,0,.7);
+    cursor: pointer;
+}
+
+.rea-overlay:hover {
+    opacity: 1;
+}
+
+.menu-container {
+    padding-top: 5%;
+}
+
+.menu-button {
+    padding-top: 2%;
+    cursor: pointer;
+}
+
+.menu-sub {
+    font-size: 10px;
+    display: none;
+}
+
+.menu-sub span {
+    cursor: pointer;
+}

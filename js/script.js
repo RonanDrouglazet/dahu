@@ -9,6 +9,8 @@
         $('.showroom').fadeOut()
     })
 
+    $('.menu-button.realisation').click(() => $('.menu-sub').toggle())
+
     function placeLogo() {
         const blackLogo = $('.main.container .logo')
         const logoBlackOffset = blackLogo.offset()
