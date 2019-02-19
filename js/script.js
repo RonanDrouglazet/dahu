@@ -9,7 +9,36 @@
         $('.showroom').fadeOut()
     })
 
-    $('.menu-button.realisation').click(() => $('.menu-sub').toggle())
+    // REALISATION
+    let reaTransitions = []
+    const showRea = (filter, duration = 200) => {
+        reaTransitions.forEach(_ => clearTimeout(_))
+        reaTransitions = []
+        $(filter).each((i, rea) => {
+            reaTransitions.push(setTimeout(() => $(rea).stop().fadeIn(), i * duration))
+        })
+    }
+
+    let reaButtonOpen = false
+    $('.menu-button.realisation').click(function() {
+        let sign1 = reaButtonOpen ? '-' : '+'
+        let sign2 = reaButtonOpen ? '+' : '-'
+        $(this).html($(this).html().replace(sign1, sign2))
+        $('.menu-sub').toggle()
+        if (sign2 === '+') {
+            showRea('.rea', 0)
+            $('.menu-sub span.active').removeClass('active')
+        }
+        reaButtonOpen = !reaButtonOpen
+    })
+
+    $('.menu-sub span').click(function() {
+        const filter = `data-filter="${$(this).attr('data-filter')}"`
+        $(`.rea`).stop().fadeOut(0)
+        showRea(`.rea[${filter}]`)
+        $('.menu-sub span.active').removeClass('active')
+        $(this).addClass('active')
+    })
 
     function placeLogo() {
         const blackLogo = $('.main.container .logo')

@@ -1,3 +1,21 @@
+@font-face {
+  font-family: lanenar;
+  src: url(../fonts/LANENAR_.ttf);
+}
+
+@font-face {
+  font-family: dejavu;
+  src: url(../fonts/DejaVuSans-Bold.ttf);
+}
+
+body {
+    font-family: lanenar;
+}
+
+.container {
+    padding-right: 0 !important;
+}
+
 .realisation img {
     width: 100%;
 }
@@ -11,11 +29,15 @@
 }
 
 .main.container {
-    padding-top: 2vh;
+    padding-top: 10vh;
 }
 
-.main.container, img.logo {
-    max-width: 95%;
+.main.container {
+    max-width: 96%;
+}
+
+img.logo {
+    max-width: 100%;
 }
 
 .showroom {
@@ -36,11 +58,11 @@
 }
 
 .content {
-    max-height: 98vh;
+    max-height: 90vh;
     overflow: scroll;
 }
 
-.rea {
+.rea > div {
     position: relative;
 }
 
@@ -74,10 +96,28 @@
 }
 
 .menu-sub {
-    font-size: 10px;
+    font-size: 12px;
     display: none;
+    line-height: 0.5;
+    padding-bottom: 1em;
+}
+
+@media screen and (max-width: 950px) {
+  .menu-sub {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 870px) {
+  .menu-sub {
+    font-size: 10px;
+  }
 }
 
 .menu-sub span {
     cursor: pointer;
+}
+
+.menu-sub span.active {
+    font-family: dejavu;
 }
