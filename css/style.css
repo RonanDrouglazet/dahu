@@ -53,6 +53,12 @@ img.logo {
     cursor: pointer;
 }
 
+.showroom video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
 .showroom .logo {
     position: fixed;
 }

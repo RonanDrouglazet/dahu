@@ -1,9 +1,18 @@
 (function () {
 
     // BACKGROUND management
-    const bgCount = 3
-    const bgToShow = Math.max(1, Math.round(Math.random() * bgCount))
-    $('.showroom').css('backgroundImage', `url(images/bg${bgToShow}.jpg)`)
+    const backgrounds = [
+        'images/inauguration.jpg', 'images/equipe.jpg', 'images/mur.jpg', 'images/sable.jpg',
+        'videos/encens.mp4', 'videos/gravure_bois.mp4'
+    ]
+    const bgToShow = backgrounds[
+        Math.round(Math.random() * (backgrounds.length - 1))
+    ]
+    if (bgToShow.match(/\.(jpg)$/)) {
+        $('.showroom').css('backgroundImage', `url(${bgToShow})`)
+    } else {
+        $('.showroom').append(`<video src="${bgToShow}" autoplay muted loop></video>`)
+    }
 
     $('.showroom').click(() => {
         $('.showroom').fadeOut()
