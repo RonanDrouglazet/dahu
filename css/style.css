@@ -14,6 +14,7 @@ body {
 
 .container {
     padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 .realisation img {
@@ -25,7 +26,7 @@ body {
 }
 
 .menu {
-    padding-left: 2.5%;
+    padding-left: 1%;
 }
 
 .main.container {
@@ -33,7 +34,12 @@ body {
 }
 
 .main.container {
-    max-width: 96%;
+    max-width: 100%;
+}
+
+.main.container > .row {
+    max-width: 98%;
+    margin: auto;
 }
 
 img.logo {
@@ -63,8 +69,8 @@ img.logo {
     position: fixed;
 }
 
-.content {
-    max-height: 90vh;
+.main.container {
+    max-height: 100vh;
     overflow: scroll;
 }
 
@@ -97,8 +103,16 @@ img.logo {
 }
 
 .menu-button {
-    padding-top: 2%;
+    padding-top: 2.2%;
     cursor: pointer;
+}
+
+.menu {
+    position: relative;
+}
+
+.menu .fixed {
+    position: fixed;
 }
 
 .menu-sub {
@@ -126,4 +140,13 @@ img.logo {
 
 .menu-sub span.active {
     font-family: dejavu;
+}
+
+.main.container .col-3 {
+    flex: 0 0 23%;
+}
+
+.main.container .col-9 {
+    flex: 0 0 77%;
+    max-width: 77%;
 }
