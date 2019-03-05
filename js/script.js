@@ -14,10 +14,8 @@
         $('.showroom').append(`<video src="${bgToShow}" autoplay muted loop></video>`)
     }
 
-    $(`.rea`).stop().fadeOut(0)
     $('.showroom').click(() => {
         $('.showroom').fadeOut()
-        showRea('.rea', 0)
     })
 
     // REALISATION
@@ -99,7 +97,7 @@
         const blackLogo = $('.main.container .logo')
         const logoBlackOffset = blackLogo.offset()
         $('.showroom .logo').css({
-            top: logoBlackOffset.top,
+            top: logoBlackOffset.top - scrollY,
             left: logoBlackOffset.left,
 
         })
