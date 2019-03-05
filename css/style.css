@@ -30,7 +30,7 @@ body {
 }
 
 .main.container {
-    padding-top: 10vh;
+    padding-top: 5%;
 }
 
 .main.container {
@@ -70,8 +70,8 @@ img.logo {
 }
 
 .main.container {
-    max-height: 100vh;
-    overflow: scroll;
+    max-height: 100%;
+    overflow-y: auto;
 }
 
 .rea > div {
@@ -99,7 +99,7 @@ img.logo {
 }
 
 .menu-container {
-    padding-top: 5%;
+    padding-top: 3%;
 }
 
 .menu-button {
@@ -113,6 +113,21 @@ img.logo {
 
 .menu .fixed {
     position: fixed;
+    width: 23%;
+    height: 90%;
+}
+
+.menu .content-text {
+    height: 50%;
+    right: 10%;
+    bottom: 8%;
+    text-align: justify;
+    overflow-y: auto;
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    font-size: 0.9rem;
 }
 
 .menu-sub {
@@ -149,4 +164,71 @@ img.logo {
 .main.container .col-9 {
     flex: 0 0 77%;
     max-width: 77%;
+}
+
+.rea .slides {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 77%;
+    background: white;
+    padding-top: 5%;
+    z-index: 2;
+}
+
+.rea .description {
+    display: none;
+}
+
+.rea .slides .slides-container {
+    width: 95%;
+    height: 90%;
+    margin: auto;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.rea .slides img {
+    opacity: 0;
+    margin: auto;
+    position: absolute;
+    transition: opacity 1s, transform 1s;
+    transition-delay: 0;
+    height: 100%;
+    width: auto;
+}
+
+.rea .slides img.current {
+    opacity: 1;
+	z-index: 105;
+    transform: translate3d(0, 0, 0);
+}
+
+.rea .slides img.next {
+    transform: translate3d(100%, 0, 0);
+}
+
+.rea .slides img.prev {
+    transform: translate3d(-100%, 0, 0);
+}
+
+.slides .bt {
+    position: absolute;
+    width: 50%;
+    height: 100%;
+    z-index: 200;
+}
+
+.slides .bt.left {
+    cursor: url(http://cigue.net/wp-content/themes/cigue/_/img/cur-left.png), default;
+    left: 0;
+}
+
+.slides .bt.right {
+    cursor: url(http://cigue.net/wp-content/themes/cigue/_/img/cur-right.png), default;
+    right: 0;
 }

@@ -42,12 +42,70 @@
     })
 
     $('.menu-sub span').click(function() {
+        $('.rea .slides').fadeOut(0)
+
         const filter = `data-filter="${$(this).attr('data-filter')}"`
         $(`.rea`).stop().fadeOut(0)
         showRea(`.rea[${filter}]`)
         $('.menu-sub span.active').removeClass('active')
         $(this).addClass('active')
+        $('.menu .content-text').html('')
     })
+
+    $('.rea').click(function() {
+        $(this).find('.slides').fadeIn()
+        $('.menu .content-text').html($(this).find('.description').html())
+        /*$(this).find('.slides').click(() => {
+            move_in_galery($(this).find('.slides'), i++)
+        })*/
+    })
+
+    $('.rea .slides').each((i, slides) => {
+        const rea = $(slides)
+        rea.find('a.left').click(() => move_in_galery(rea, -1))
+        rea.find('a.right').click(() => move_in_galery(rea, +1))
+    })
+
+    $('.rea .slides').fadeOut(0)
+
+    /** GALERY */
+    const prepare_neighbours = function (fsi, index) {
+        let indexNext = index + 1
+        let indexPrev = index - 1
+        if (indexNext > fsi.length - 1) {
+            indexNext = 0
+        }
+        if (indexPrev < 0) {
+            indexPrev = fsi.length - 1
+        }
+        const next = $(fsi.get(indexNext))
+        const prev = $(fsi.get(indexPrev))
+        next.addClass('next').removeClass('prev')
+        prev.addClass('prev').removeClass('next')
+    }
+
+    const move_in_galery = function (slides, to) {
+        // get index
+        const old = slides.find('img.current')
+        let index = old.index() + to
+        const fsi = slides.find('img')
+
+        if (index > fsi.length - 1) {
+            index = 0
+        } else if (index < 0) {
+            index = fsi.length - 1
+        }
+
+        old.removeClass('current')
+        prepare_neighbours(fsi, index)
+
+        const current = $(fsi.get(index))
+        current.removeClass('next').removeClass('prev').addClass('current')
+    }
+
+    /**
+     * END GALERY
+     */
 
     function placeLogo() {
         const blackLogo = $('.main.container .logo')
