@@ -14,8 +14,10 @@
         $('.showroom').append(`<video src="${bgToShow}" autoplay muted loop></video>`)
     }
 
+    $(`.rea`).stop().fadeOut(0)
     $('.showroom').click(() => {
         $('.showroom').fadeOut()
+        showRea('.rea', 0)
     })
 
     // REALISATION
@@ -43,7 +45,6 @@
 
     $('.menu-sub span').click(function() {
         $('.rea .slides').fadeOut(0)
-
         const filter = `data-filter="${$(this).attr('data-filter')}"`
         $(`.rea`).stop().fadeOut(0)
         showRea(`.rea[${filter}]`)
