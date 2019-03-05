@@ -10,6 +10,7 @@
 
 body {
     font-family: lanenar;
+    overflow-y: scroll;
 }
 
 .container {
@@ -71,7 +72,7 @@ img.logo {
 
 .main.container {
     max-height: 100%;
-    overflow-y: scroll;
+    overflow-y: auto;
 }
 
 .rea > div {
