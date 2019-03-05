@@ -24,7 +24,7 @@
         reaTransitions.forEach(_ => clearTimeout(_))
         reaTransitions = []
         $(filter).each((i, rea) => {
-            reaTransitions.push(setTimeout(() => $(rea).stop().fadeIn(), i * duration))
+            reaTransitions.push(setTimeout(() => $(rea).stop().fadeIn(), 0))
         })
     }
 
@@ -52,22 +52,6 @@
         $('.menu .content-text').html('')
     })
 
-    $('.rea').click(function() {
-        $(this).find('.slides').fadeIn()
-        $('.menu .content-text').html($(this).find('.description').html())
-        /*$(this).find('.slides').click(() => {
-            move_in_galery($(this).find('.slides'), i++)
-        })*/
-    })
-
-    $('.rea .slides').each((i, slides) => {
-        const rea = $(slides)
-        rea.find('a.left').click(() => move_in_galery(rea, -1))
-        rea.find('a.right').click(() => move_in_galery(rea, +1))
-    })
-
-    $('.rea .slides').fadeOut(0)
-
     /** GALERY */
     const prepare_neighbours = function (fsi, index) {
         let indexNext = index + 1
@@ -84,10 +68,10 @@
         prev.addClass('prev').removeClass('next')
     }
 
-    const move_in_galery = function (slides, to) {
+    const move_in_galery = function (slides, relative, absolute) {
         // get index
         const old = slides.find('img.current')
-        let index = old.index() + to
+        let index = absolute !== undefined ? absolute : old.index() + relative
         const fsi = slides.find('img')
 
         if (index > fsi.length - 1) {
@@ -101,6 +85,9 @@
 
         const current = $(fsi.get(index))
         current.removeClass('next').removeClass('prev').addClass('current')
+
+        slides.find('.num-button.current').removeClass('current')
+        $(slides.find('.num-button').get(index)).addClass('current')
     }
 
     /**
@@ -117,6 +104,24 @@
         })
         $('.showroom .logo img').css('width', blackLogo.width() + 'px')
     }
+
+    $('.rea').click(function() {
+        $(this).find('.slides').fadeIn()
+        $('.menu .content-text').html($(this).find('.description').html())
+    })
+
+    $('.rea .slides').each((i, slides) => {
+        const rea = $(slides)
+        rea.find('a.left').click(() => move_in_galery(rea, -1))
+        rea.find('a.right').click(() => move_in_galery(rea, +1))
+        rea.find('img').each(index => {
+            rea.find('.num-button-container').append(`<div class="num-button">${index + 1}</div>`)
+            rea.find('.num-button').last().click(() => move_in_galery(rea, 0, index))
+        })
+        move_in_galery(rea, 0, 0)
+    })
+
+    $('.rea .slides').fadeOut(0)
 
     setInterval(placeLogo, 100)
     placeLogo()
