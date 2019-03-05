@@ -71,7 +71,7 @@ img.logo {
 
 .main.container {
     max-height: 100%;
-    overflow-y: auto;
+    overflow-y: scroll;
 }
 
 .rea > div {
