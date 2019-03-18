@@ -122,6 +122,7 @@ img.logo {
     height: 50%;
     right: 10%;
     bottom: 8%;
+    left: 1%;
     text-align: justify;
     overflow-y: auto;
     position: absolute;
@@ -167,7 +168,7 @@ img.logo {
     max-width: 77%;
 }
 
-.rea .slides {
+.slides {
     position: fixed;
     top: 0;
     left: 0;
@@ -182,7 +183,7 @@ img.logo {
     display: none;
 }
 
-.rea .slides .slides-container {
+.slides .slides-container {
     width: 95%;
     height: 90%;
     margin: auto;
@@ -193,7 +194,7 @@ img.logo {
     position: relative;
 }
 
-.rea .slides img {
+.slides img {
     opacity: 0;
     margin: auto;
     position: absolute;
@@ -203,17 +204,17 @@ img.logo {
     width: auto;
 }
 
-.rea .slides img.current {
+.slides img.current {
     opacity: 1;
 	z-index: 105;
     transform: translate3d(0, 0, 0);
 }
 
-.rea .slides img.next {
+.slides img.next {
     transform: translate3d(100%, 0, 0);
 }
 
-.rea .slides img.prev {
+.slides img.prev {
     transform: translate3d(-100%, 0, 0);
 }
 
@@ -258,4 +259,18 @@ img.logo {
 
 .slides .num-button.current {
     border: 1px solid #888888;
+}
+
+.content > .row:not(.realisation) {
+    display: none;
+    text-align: center;
+    overflow: hidden;
+}
+
+.content > .row:not(.realisation) img {
+    height: 83vh;
+}
+
+.content > .row:not(.realisation) .content-text {
+    display: none;
 }

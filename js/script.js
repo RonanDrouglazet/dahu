@@ -18,6 +18,15 @@
         $('.showroom').fadeOut()
     })
 
+    const showRow = name => {
+        if (!$(`.content > .row.${name}`).is(':visible')) {
+            $('.content > .row').fadeOut(0)
+            $(`.content > .row.${name}`).stop().fadeIn()
+            $('.menu .content-text').html('')
+            $('.menu .content-text').html($(`.content > .row.${name} .content-text`).html())
+        }
+    }
+
     // REALISATION
     let reaTransitions = []
     const showRea = (filter, duration = 200) => {
@@ -30,26 +39,55 @@
 
     let reaButtonOpen = false
     $('.menu-button.realisation').click(function() {
+        showRow('realisation')
         let sign1 = reaButtonOpen ? '-' : '+'
         let sign2 = reaButtonOpen ? '+' : '-'
         $(this).html($(this).html().replace(sign1, sign2))
-        $('.menu-sub').toggle()
+        $('.menu-sub.realisation').toggle()
         if (sign2 === '+') {
             showRea('.rea', 0)
-            $('.menu-sub span.active').removeClass('active')
+            $('.menu-sub.realisation span.active').removeClass('active')
         }
         reaButtonOpen = !reaButtonOpen
     })
 
-    $('.menu-sub span').click(function() {
+    $('.menu-sub.realisation span').click(function() {
         $('.rea .slides').fadeOut(0)
         const filter = `data-filter="${$(this).attr('data-filter')}"`
         $(`.rea`).stop().fadeOut(0)
         showRea(`.rea[${filter}]`)
-        $('.menu-sub span.active').removeClass('active')
+        $('.menu-sub.realisation span.active').removeClass('active')
         $(this).addClass('active')
         $('.menu .content-text').html('')
     })
+
+    let atelierButtonOpen = false
+    $('.menu-button.atelier').click(function () {
+        //showRow('realisation')
+        let sign1 = atelierButtonOpen ? '-' : '+'
+        let sign2 = atelierButtonOpen ? '+' : '-'
+        $(this).html($(this).html().replace(sign1, sign2))
+        $('.menu-sub.atelier').toggle()
+        if (sign2 === '+') {
+            //showRea('.rea', 0)
+            $('.menu-sub.atelier span.active').removeClass('active')
+        }
+        atelierButtonOpen = !atelierButtonOpen
+    })
+
+    $('.menu-sub.atelier span').each(function() {
+        const el = $(this)
+        const page = el.attr('data-page')
+
+        el.click(() => {
+            showRow(page)
+            if (page === 'equipe') {
+                $(`.row.${page} .slides`).fadeIn()
+            }
+        })
+    })
+
+    $('.menu-button.contact').click(() => showRow('contact'))
 
     /** GALERY */
     const prepare_neighbours = function (fsi, index) {
@@ -109,7 +147,7 @@
         $('.menu .content-text').html($(this).find('.description').html())
     })
 
-    $('.rea .slides').each((i, slides) => {
+    $('.slides').each((i, slides) => {
         const rea = $(slides)
         rea.find('a.left').click(() => move_in_galery(rea, -1))
         rea.find('a.right').click(() => move_in_galery(rea, +1))
@@ -120,7 +158,7 @@
         move_in_galery(rea, 0, 0)
     })
 
-    $('.rea .slides').fadeOut(0)
+    $('.slides').fadeOut(0)
 
     setInterval(placeLogo, 100)
     placeLogo()
