@@ -37,18 +37,26 @@
         })
     }
 
-    let reaButtonOpen = false
+    const menuButtonOpen = {}
+    const toggleMenu = (menu, onlyClose) => {
+        const isOpen = menuButtonOpen[menu]
+        if (onlyClose && !isOpen) return
+        let sign1 = isOpen ? '-' : '+'
+        let sign2 = isOpen ? '+' : '-'
+        $(`.menu-button.${menu}`).html($(`.menu-button.${menu}`).html().replace(sign1, sign2))
+        $(`.menu-sub.${menu}`).toggle()
+        if (sign2 === '+') {
+            $(`.menu-sub.${menu} span.active`).removeClass('active')
+        }
+        menuButtonOpen[menu] = !isOpen
+        return sign2
+    }
     $('.menu-button.realisation').click(function() {
         showRow('realisation')
-        let sign1 = reaButtonOpen ? '-' : '+'
-        let sign2 = reaButtonOpen ? '+' : '-'
-        $(this).html($(this).html().replace(sign1, sign2))
-        $('.menu-sub.realisation').toggle()
-        if (sign2 === '+') {
+        toggleMenu('atelier', true)
+        if (toggleMenu('realisation') === '+') {
             showRea('.rea', 0)
-            $('.menu-sub.realisation span.active').removeClass('active')
         }
-        reaButtonOpen = !reaButtonOpen
     })
 
     $('.menu-sub.realisation span').click(function() {
@@ -61,18 +69,9 @@
         $('.menu .content-text').html('')
     })
 
-    let atelierButtonOpen = false
     $('.menu-button.atelier').click(function () {
-        //showRow('realisation')
-        let sign1 = atelierButtonOpen ? '-' : '+'
-        let sign2 = atelierButtonOpen ? '+' : '-'
-        $(this).html($(this).html().replace(sign1, sign2))
-        $('.menu-sub.atelier').toggle()
-        if (sign2 === '+') {
-            //showRea('.rea', 0)
-            $('.menu-sub.atelier span.active').removeClass('active')
-        }
-        atelierButtonOpen = !atelierButtonOpen
+        toggleMenu('realisation', true)
+        toggleMenu('atelier')
     })
 
     $('.menu-sub.atelier span').each(function() {
@@ -81,13 +80,17 @@
 
         el.click(() => {
             showRow(page)
-            if (page === 'equipe') {
-                $(`.row.${page} .slides`).fadeIn()
-            }
+            $(`.row.${page} .slides`).fadeIn()
+            $('.menu-sub.atelier span.active').removeClass('active')
+            $(this).addClass('active')
         })
     })
 
-    $('.menu-button.contact').click(() => showRow('contact'))
+    $('.menu-button.contact').click(() => {
+        showRow('contact')
+        toggleMenu('realisation', true)
+        toggleMenu('atelier', true)
+    })
 
     /** GALERY */
     const prepare_neighbours = function (fsi, index) {
@@ -101,15 +104,31 @@
         }
         const next = $(fsi.get(indexNext))
         const prev = $(fsi.get(indexPrev))
+
+        if (next.hasClass('prev')) {
+            console.log('no transition', next)
+            next.addClass('no-transition')
+        }
+        if (prev.hasClass('next')) {
+            prev.addClass('no-transition')
+        }
         next.addClass('next').removeClass('prev')
         prev.addClass('prev').removeClass('next')
+        setTimeout(() => {
+            if (next.hasClass('no-transition')) {
+                next.removeClass('no-transition')
+            }
+            if (prev.hasClass('no-transition')) {
+                prev.removeClass('no-transition')
+            }
+        })
     }
 
     const move_in_galery = function (slides, relative, absolute) {
         // get index
-        const old = slides.find('img.current')
+        const old = slides.find('.slide.current')
         let index = absolute !== undefined ? absolute : old.index() + relative
-        const fsi = slides.find('img')
+        const fsi = slides.find('.slide')
 
         if (index > fsi.length - 1) {
             index = 0
@@ -122,6 +141,11 @@
 
         const current = $(fsi.get(index))
         current.removeClass('next').removeClass('prev').addClass('current')
+
+        const currentText = current.find('.content-text')
+        if (currentText.length) {
+            $('.menu .content-text').html(currentText.html())
+        }
 
         slides.find('.num-button.current').removeClass('current')
         $(slides.find('.num-button').get(index)).addClass('current')
@@ -155,10 +179,14 @@
             rea.find('.num-button-container').append(`<div class="num-button">${index + 1}</div>`)
             rea.find('.num-button').last().click(() => move_in_galery(rea, 0, index))
         })
+        rea.find('.slide').addClass('next')
         move_in_galery(rea, 0, 0)
     })
 
     $('.slides').fadeOut(0)
+
+    $('.menu .logo').click(() => showRow('realisation'))
+    $('.menu .content-text').html('')
 
     setInterval(placeLogo, 100)
     placeLogo()

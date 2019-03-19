@@ -46,6 +46,9 @@ body {
 img.logo {
     max-width: 100%;
 }
+.menu .logo {
+    cursor: pointer;
+}
 
 .showroom {
     position: fixed;
@@ -156,7 +159,9 @@ img.logo {
 }
 
 .menu-sub span.active {
-    font-family: dejavu;
+    font-family: lanenar;
+    font-weight: bolder;
+    color: black;
 }
 
 .main.container .col-3 {
@@ -194,27 +199,39 @@ img.logo {
     position: relative;
 }
 
-.slides img {
-    opacity: 0;
-    margin: auto;
+.slides .slide {
     position: absolute;
-    transition: opacity 1s, transform 1s;
+    transition: transform 0.3s;
+    transition-timing-function: ease;
     transition-delay: 0;
     height: 100%;
-    width: auto;
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.slides img.current {
-    opacity: 1;
+.slides img {
+    width: auto;
+    height: 100%;
+}
+
+.no-transition {
+    transition: none !important;
+    opacity: 0 !important;
+}
+
+.slides .slide.current {
 	z-index: 105;
     transform: translate3d(0, 0, 0);
 }
 
-.slides img.next {
+.slides .slide.next {
     transform: translate3d(100%, 0, 0);
 }
 
-.slides img.prev {
+.slides .slide.prev {
     transform: translate3d(-100%, 0, 0);
 }
 
