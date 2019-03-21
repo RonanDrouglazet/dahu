@@ -23,6 +23,7 @@
             $('.content > .row').fadeOut(0)
             $(`.content > .row.${name}`).stop().fadeIn()
             $('.menu .content-text').html('')
+            $('.menu .num-button-container').html('')
             $('.menu .content-text').html($(`.content > .row.${name} .content-text`).html())
         }
     }
@@ -80,9 +81,16 @@
 
         el.click(() => {
             showRow(page)
-            $(`.row.${page} .slides`).fadeIn()
+            const slide = $(`.row.${page} .slides`)
+            slide.fadeIn()
             $('.menu-sub.atelier span.active').removeClass('active')
             $(this).addClass('active')
+            $('.menu .num-button-container').html('')
+            slide.find('img').each(index => {
+                $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
+                $('.menu .num-button').last().click(() => move_in_galery(slide, 0, index))
+            })
+            move_in_galery(slide, 0, 0)
         })
     })
 
@@ -106,7 +114,6 @@
         const prev = $(fsi.get(indexPrev))
 
         if (next.hasClass('prev')) {
-            console.log('no transition', next)
             next.addClass('no-transition')
         }
         if (prev.hasClass('next')) {
@@ -114,6 +121,12 @@
         }
         next.addClass('next').removeClass('prev')
         prev.addClass('prev').removeClass('next')
+
+        fsi.each((i, img) => {
+            if ([index, indexNext, indexPrev].indexOf(i) === -1) {
+                $(img).removeClass('current').addClass('next')
+            }
+        })
         setTimeout(() => {
             if (next.hasClass('no-transition')) {
                 next.removeClass('no-transition')
@@ -147,8 +160,8 @@
             $('.menu .content-text').html(currentText.html())
         }
 
-        slides.find('.num-button.current').removeClass('current')
-        $(slides.find('.num-button').get(index)).addClass('current')
+        $('.menu .num-button.current').removeClass('current')
+        $($('.menu .num-button').get(index)).addClass('current')
     }
 
     /**
@@ -167,18 +180,22 @@
     }
 
     $('.rea').click(function() {
-        $(this).find('.slides').fadeIn()
-        $('.menu .content-text').html($(this).find('.description').html())
+        const rea = $(this)
+        if (!rea.find('.slides').is(':visible')) {
+            rea.find('.slides').fadeIn()
+            $('.menu .content-text').html(rea.find('.description').html())
+            $('.menu .num-button-container').html('')
+            rea.find('.slides img').each((index,el) => {
+                $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
+                $('.menu .num-button').last().click(() => move_in_galery(rea, 0, index))
+            })
+        }
     })
 
     $('.slides').each((i, slides) => {
         const rea = $(slides)
         rea.find('a.left').click(() => move_in_galery(rea, -1))
         rea.find('a.right').click(() => move_in_galery(rea, +1))
-        rea.find('img').each(index => {
-            rea.find('.num-button-container').append(`<div class="num-button">${index + 1}</div>`)
-            rea.find('.num-button').last().click(() => move_in_galery(rea, 0, index))
-        })
         rea.find('.slide').addClass('next')
         move_in_galery(rea, 0, 0)
     })
