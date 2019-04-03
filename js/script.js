@@ -215,4 +215,8 @@
     placeLogo()
     $('.showroom .logo').fadeOut(0)
     $('.showroom .logo').fadeIn(500)
+
+    if(top.location.hostname.match('octoboot.ovh')) {
+        $('.slides .bt').hide()
+    }
 })()
