@@ -19,6 +19,7 @@
     })
 
     const showRow = name => {
+        cleanSlides()
         if (!$(`.content > .row.${name}`).is(':visible')) {
             $('.content > .row').fadeOut(0)
             $(`.content > .row.${name}`).stop().fadeIn()
@@ -26,7 +27,6 @@
             $('.menu .num-button-container').html('')
             $('.menu .content-text').html($(`.content > .row.${name} .content-text`).html())
         }
-        cleanSlides()
     }
 
     // REALISATION
