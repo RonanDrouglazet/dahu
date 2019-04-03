@@ -67,6 +67,18 @@
         $('.slides').fadeOut(0)
     }
 
+    const initSlideButton = slide => {
+        $('.menu .num-button-container').html('')
+        slide.find('.slide').each(index => {
+            $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
+            $('.menu .num-button').last().click(() => move_in_galery(slide, 0, index))
+        })
+    }
+
+    window.refreshSlideButton = img => {
+        initSlideButton($(img).parents('.slides'))
+    }
+
     $('.menu-sub.realisation span').click(function() {
         const filter = `data-filter="${$(this).attr('data-filter')}"`
         $(`.rea`).stop().fadeOut(0)
@@ -91,11 +103,7 @@
             slide.fadeIn()
             $('.menu-sub.atelier span.active').removeClass('active')
             $(this).addClass('active')
-            $('.menu .num-button-container').html('')
-            slide.find('img').each(index => {
-                $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
-                $('.menu .num-button').last().click(() => move_in_galery(slide, 0, index))
-            })
+            initSlideButton(slide)
             move_in_galery(slide, 0, 0)
         })
     })
@@ -190,11 +198,7 @@
         if (!rea.find('.slides').is(':visible')) {
             rea.find('.slides').fadeIn()
             $('.menu .content-text').html(rea.find('.description').html())
-            $('.menu .num-button-container').html('')
-            rea.find('.slides img').each((index,el) => {
-                $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
-                $('.menu .num-button').last().click(() => move_in_galery(rea, 0, index))
-            })
+            initSlideButton(rea)
         }
     })
 
