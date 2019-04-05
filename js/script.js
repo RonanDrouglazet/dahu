@@ -76,7 +76,10 @@
     }
 
     window.refreshSlideButton = img => {
-        initSlideButton($(img).parents('.slides'))
+        const slides = $(img).parents('.slides')
+        const index = $(img).parent().index()
+        initSlideButton(slides)
+        move_in_galery(slides, 0, index + 1)
     }
 
     $('.menu-sub.realisation span').click(function() {
