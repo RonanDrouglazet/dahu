@@ -223,4 +223,12 @@
     if(top.location.hostname.match('octoboot.ovh')) {
         $('.slides .bt').hide()
     }
+
+    window.octoboot_before_save = (done) => {
+        $('.showroom').fadeIn(0)
+        showRow('realisation')
+        toggleMenu('atelier', true)
+        toggleMenu('realisation', true)
+        setTimeout(done, 200)
+    }
 })()
