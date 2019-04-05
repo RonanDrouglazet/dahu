@@ -77,9 +77,9 @@
 
     window.refreshSlideButton = img => {
         const slides = $(img).parents('.slides')
-        const index = $(img).parent().index()
+        const index = $(img).index()
         initSlideButton(slides)
-        move_in_galery(slides, 0, index + 1)
+        move_in_galery(slides, 0, index - 1)
     }
 
     $('.menu-sub.realisation span').click(function() {
