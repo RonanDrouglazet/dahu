@@ -227,8 +227,10 @@
     window.octoboot_before_save = (done) => {
         $('.showroom').fadeIn(0)
         showRow('realisation')
+        showRea('.rea', 0)
         toggleMenu('atelier', true)
         toggleMenu('realisation', true)
+        $('.slides .bt').show()
         setTimeout(done, 200)
     }
 })()
