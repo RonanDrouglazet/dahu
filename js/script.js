@@ -212,7 +212,10 @@
 
     $('.slides').fadeOut(0)
 
-    $('.menu .logo').click(() => showRow('realisation'))
+    $('.menu .logo').click(() => {
+        showRow('realisation')
+        showRea('.rea', 0)
+    })
     $('.menu .content-text').html('')
 
     setInterval(placeLogo, 100)
