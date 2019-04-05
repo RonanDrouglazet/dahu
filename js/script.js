@@ -231,6 +231,6 @@
         toggleMenu('atelier', true)
         toggleMenu('realisation', true)
         $('.slides .bt').show()
-        setTimeout(done, 200)
+        setTimeout(done, 1000)
     }
 })()
