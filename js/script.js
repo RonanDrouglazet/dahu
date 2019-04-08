@@ -23,9 +23,8 @@
         if (!$(`.content > .row.${name}`).is(':visible')) {
             $('.content > .row').fadeOut(0)
             $(`.content > .row.${name}`).stop().fadeIn()
-            $('.menu .content-text').html('')
-            $('.menu .num-button-container').html('')
-            $('.menu .content-text').html($(`.content > .row.${name} .content-text`).html())
+            cleanSlideButton()
+            setTextInMenu($(`.content > .row.${name} .content-text`))
         }
     }
 
@@ -61,25 +60,61 @@
         }
     })
 
+    const cleanTextInMenu = () => {
+        const menuText = $('.menu .content-text')
+        const bind = menuText.attr('ob-bind')
+        if (bind) {
+            $('.' + bind).removeClass(bind).html(menuText.html())
+            menuText.removeAttr('ob-bind')
+        }
+        menuText.html('')
+        return menuText
+    }
+
+    const setTextInMenu = fromElement => {
+        const id = 'c' + Date.now()
+        fromElement.addClass(id)
+        cleanTextInMenu().attr('ob-bind', id).html(fromElement.html())
+    }
+
     const cleanSlides = () => {
         $('.num-button-container').html('')
-        $('.menu .content-text').html('')
         $('.slides').fadeOut(0)
+        cleanTextInMenu()
+    }
+
+    const cleanSlideButton = () => {
+        $('.menu .num-button-container num-button').each((index, elem) => {
+            const bind = $(elem).attr('ob-bind')
+            $('.' + bind).removeClass(bind)
+            $(elem).remove()
+        })
+        $('.menu .num-button-container').html('')
     }
 
     const initSlideButton = slide => {
-        $('.menu .num-button-container').html('')
-        slide.find('.slide').each(index => {
-            $('.menu .num-button-container').append(`<div class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
+        cleanSlideButton()
+        slide.find('.slide').each((index, elem) => {
+            const id = 't' + (Date.now() * Math.random()).toFixed(0)
+            $(elem).addClass(id)
+            $('.menu .num-button-container').append(`<div ob-duplicable="refreshSlideButton" ob-bind="${id}" class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
             $('.menu .num-button').last().click(() => move_in_galery(slide, 0, index))
         })
     }
 
-    window.refreshSlideButton = img => {
-        const slides = $(img).parents('.slides')
-        const index = $(img).index()
-        initSlideButton(slides)
-        move_in_galery(slides, 0, index - 1)
+    window.refreshSlideButton = (num, duplicate) => {
+        const img = $('.' + $(num).attr('ob-bind'))
+        const slides = img.parents('.slides')
+        const index = img.index()
+        if (duplicate) {
+            img.clone().insertAfter(img)
+        } else {
+            img.remove()
+        }
+        setTimeout(() => {
+            initSlideButton(slides)
+            move_in_galery(slides, 0, index)
+        }, 200)
     }
 
     $('.menu-sub.realisation span').click(function() {
@@ -174,7 +209,7 @@
 
         const currentText = current.find('.content-text')
         if (currentText.length) {
-            $('.menu .content-text').html(currentText.html())
+            setTextInMenu(currentText)
         }
 
         $('.menu .num-button.current').removeClass('current')
@@ -200,7 +235,7 @@
         const rea = $(this)
         if (!rea.find('.slides').is(':visible')) {
             rea.find('.slides').fadeIn()
-            $('.menu .content-text').html(rea.find('.description').html())
+            setTextInMenu(rea.find('.description'))
             initSlideButton(rea)
         }
     })
@@ -219,7 +254,7 @@
         showRow('realisation')
         showRea('.rea', 0)
     })
-    $('.menu .content-text').html('')
+    cleanTextInMenu()
 
     setInterval(placeLogo, 100)
     placeLogo()
