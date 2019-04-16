@@ -24,7 +24,7 @@
             $('.content > .row').fadeOut(0)
             $(`.content > .row.${name}`).stop().fadeIn()
             cleanSlideButton()
-            setTextInMenu($(`.content > .row.${name} .content-text`))
+            setTextInMenu($(`.content > .row.${name} > .content-text`))
         }
     }
 
@@ -78,13 +78,15 @@
     }
 
     const cleanSlides = () => {
-        $('.num-button-container').html('')
-        $('.slides').fadeOut(0)
+        $('.slides').fadeOut(0).each((index, slide) => {
+            move_in_galery($(slide), 0, 0, true)
+        })
         cleanTextInMenu()
+        cleanSlideButton()
     }
 
     const cleanSlideButton = () => {
-        $('.menu .num-button-container num-button').each((index, elem) => {
+        $('.menu .num-button-container .num-button').each((index, elem) => {
             const bind = $(elem).attr('ob-bind')
             $('.' + bind).removeClass(bind)
             $(elem).remove()
@@ -189,7 +191,7 @@
         })
     }
 
-    const move_in_galery = function (slides, relative, absolute) {
+    const move_in_galery = function (slides, relative, absolute, noText) {
         // get index
         const old = slides.find('.slide.current')
         let index = absolute !== undefined ? absolute : old.index() + relative
@@ -208,7 +210,7 @@
         current.removeClass('next').removeClass('prev').addClass('current')
 
         const currentText = current.find('.content-text')
-        if (currentText.length) {
+        if (!noText && currentText.length) {
             setTextInMenu(currentText)
         }
 
@@ -253,6 +255,8 @@
     $('.menu .logo').click(() => {
         showRow('realisation')
         showRea('.rea', 0)
+        toggleMenu('atelier', true)
+        toggleMenu('realisation', true)
     })
     cleanTextInMenu()
 

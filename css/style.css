@@ -129,12 +129,17 @@ img.logo {
     height: 206px;
     line-height: 1.2em;
     text-align: justify;
-    overflow-y: auto;
     position: absolute;
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
     font-size: 0.9rem;
+}
+
+.fixed-text {
+    height: 119px;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .menu .content-text h5 {
