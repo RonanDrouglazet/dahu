@@ -271,6 +271,8 @@
 
     window.octoboot_before_save = (done) => {
         $('.showroom').fadeIn(0)
+        $('.showroom video').remove()
+        $('.showroom').css('backgroundImage', '')
         showRow('realisation')
         showRea('.rea', 0)
         toggleMenu('atelier', true)
