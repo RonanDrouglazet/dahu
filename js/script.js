@@ -194,6 +194,7 @@
     const move_in_galery = function (slides, relative, absolute, noText) {
         // get index
         const old = slides.find('.slide.current')
+        const oldVideo = old.find('video')
         let index = absolute !== undefined ? absolute : old.index() + relative
         const fsi = slides.find('.slide')
 
@@ -204,10 +205,20 @@
         }
 
         old.removeClass('current')
+
+        if (oldVideo.length) {
+            oldVideo.get(0).pause()
+        }
+
         prepare_neighbours(fsi, index)
 
         const current = $(fsi.get(index))
+        const currentVideo = current.find('video')
         current.removeClass('next').removeClass('prev').addClass('current')
+
+        if (currentVideo.length) {
+            currentVideo.get(0).play()
+        }
 
         const currentText = current.find('.content-text')
         if (!noText && currentText.length) {

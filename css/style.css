@@ -228,6 +228,11 @@ img.logo {
     height: 100%;
 }
 
+.slides video {
+    width: auto;
+    height: 100%;
+}
+
 .no-transition {
     transition: none !important;
     opacity: 0 !important;
