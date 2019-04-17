@@ -259,12 +259,12 @@ img.logo {
 }
 
 .slides .bt.left {
-    cursor: url(http://cigue.net/wp-content/themes/cigue/_/img/cur-left.png), default;
+    cursor: url(//cigue.net/wp-content/themes/cigue/_/img/cur-left.png), default;
     left: 0;
 }
 
 .slides .bt.right {
-    cursor: url(http://cigue.net/wp-content/themes/cigue/_/img/cur-right.png), default;
+    cursor: url(//cigue.net/wp-content/themes/cigue/_/img/cur-right.png), default;
     right: 0;
 }
 
