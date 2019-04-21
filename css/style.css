@@ -92,10 +92,11 @@ img.logo {
     align-items: center;
     justify-content: center;
     color: black;
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: bolder;
     opacity: 0;
     transition: opacity .3s ease-in-out;
-    background: rgba(255,255,255,.7);
+    background: rgba(255,255,255,.9);
     cursor: pointer;
 }
 
@@ -126,7 +127,8 @@ img.logo {
     right: 10%;
     bottom: 0;
     left: 1%;
-    height: 206px;
+    height: 320px;
+    overflow: hidden;
     line-height: 1.2em;
     text-align: justify;
     position: absolute;
@@ -137,8 +139,8 @@ img.logo {
 }
 
 .fixed-text {
-    height: 119px;
-    overflow: hidden;
+    /*height: 119px;
+    overflow: hidden;*/
     text-overflow: ellipsis;
 }
 
@@ -259,12 +261,12 @@ img.logo {
 }
 
 .slides .bt.left {
-    cursor: url(//cigue.net/wp-content/themes/cigue/_/img/cur-left.png), default;
+    cursor: url(/images/cur-left.png), default;
     left: 0;
 }
 
 .slides .bt.right {
-    cursor: url(//cigue.net/wp-content/themes/cigue/_/img/cur-right.png), default;
+    cursor: url(/images/cur-right.png), default;
     right: 0;
 }
 
