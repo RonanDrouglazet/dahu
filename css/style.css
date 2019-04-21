@@ -124,17 +124,14 @@ img.logo {
 }
 
 .menu .content-text {
-    right: 10%;
-    bottom: 0;
-    left: 1%;
+    margin-right: 10%;
+    margin-top: 50px;
     height: 320px;
     overflow: hidden;
     line-height: 1.2em;
     text-align: justify;
-    position: absolute;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
     font-size: 0.9rem;
 }
 

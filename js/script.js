@@ -78,8 +78,8 @@
     }
 
     const cleanSlides = () => {
-        $('.slides').fadeOut(0).each((index, slide) => {
-            move_in_galery($(slide), 0, 0, true)
+        $('.slides').fadeOut(300).each((index, slide) => {
+            setTimeout(() => move_in_galery($(slide), 0, 0, true), 2000)
         })
         cleanTextInMenu()
         cleanSlideButton()
