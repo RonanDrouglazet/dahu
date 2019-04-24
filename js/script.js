@@ -24,8 +24,9 @@
             $('.content > .row').fadeOut(0)
             $(`.content > .row.${name}`).stop().fadeIn()
             cleanSlideButton()
-            setTextInMenu($(`.content > .row.${name} > .content-text`))
+
         }
+        setTextInMenu($(`.content > .row.${name} > .content-text`))
     }
 
     // REALISATION
