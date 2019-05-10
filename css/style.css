@@ -258,12 +258,12 @@ img.logo {
 }
 
 .slides .bt.left {
-    cursor: url(../images/cur-left.png), default;
+    cursor: url(http://ronandrouglazet.github.io/dahu/images/cur-left.png), default;
     left: 0;
 }
 
 .slides .bt.right {
-    cursor: url(../images/cur-right.png), default;
+    cursor: url(http://ronandrouglazet.github.io/dahu/images/cur-right.png), default;
     right: 0;
 }
 
