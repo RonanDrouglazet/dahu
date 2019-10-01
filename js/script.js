@@ -2,8 +2,8 @@
 
     // BACKGROUND management
     const backgrounds = [
-        'images/inauguration.jpg', 'images/equipe.jpg', 'images/mur.jpg', 'images/sable.jpg',
-        'videos/encens.mp4', 'videos/gravure_bois.mp4'
+        
+        'videos/gravure_bois.mp4'
     ]
     const bgToShow = backgrounds[
         Math.round(Math.random() * (backgrounds.length - 1))
