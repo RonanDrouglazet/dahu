@@ -2,7 +2,7 @@
 
     // BACKGROUND management
     const backgrounds = [
-        
+
         'videos/gravure_bois.mp4'
     ]
     const bgToShow = backgrounds[
@@ -153,6 +153,9 @@
         showRow('contact')
         toggleMenu('realisation', true)
         toggleMenu('atelier', true)
+        const video = $('.row.contact video').get(0)
+        video.currentTime = 0
+        video.play()
     })
 
     /** GALERY */
