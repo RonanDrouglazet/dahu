@@ -238,7 +238,7 @@
      */
 
     function placeLogo() {
-        const blackLogo = $('.main.container .logo')
+        const blackLogo = window.screen.availWidth > 576 ? $($('.main.container .logo').get(1)) : $($('.main.container .logo').get(0))
         const logoBlackOffset = blackLogo.offset()
         $('.showroom .logo').css({
             top: logoBlackOffset.top - scrollY,
