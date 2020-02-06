@@ -371,11 +371,6 @@ img.logo {
         height: 48%;
     }
 
-    .row.equipe .slides .slides-container,
-    .row.equipe .slides .bt {
-        height: 65%;
-    }
-
     .rea .description {
         display: block;
         padding: 10px;
@@ -397,4 +392,14 @@ img.logo {
     }
 
 
+}
+
+@media (orientation: portrait) {
+    .content > .row:not(.realisation) img {
+        height: auto;
+    }
+    .slides img {
+        width: 100%;
+        height: auto;
+    }
 }
