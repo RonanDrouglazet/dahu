@@ -26,7 +26,10 @@
             cleanSlideButton()
 
         }
-        setTextInMenu($(`.content > .row.${name} > .content-text`))
+        const text = name === 'contact' ?
+            $(`.content > .row.${name} > .content-text`) :
+            $(`.content > .row.${name} > .slides > .content-text`)
+        setTextInMenu(text)
     }
 
     // REALISATION
@@ -78,21 +81,28 @@
         cleanTextInMenu().attr('ob-bind', id).html(fromElement.html())
     }
 
+    const setTextInSlide = (slide, text) => {
+        const slideContainer = slide.parents('.slides')
+        if (!slideContainer.children('.content-text').length) {
+            slideContainer.append(text)
+        }
+    }
+
     const cleanSlides = () => {
         $('.slides').fadeOut(300).each((index, slide) => {
-            setTimeout(() => move_in_galery($(slide), 0, 0, true), 2000)
+            //setTimeout(() => move_in_galery($(slide), 0, 0, true), 200)
         })
         cleanTextInMenu()
         cleanSlideButton()
     }
 
     const cleanSlideButton = () => {
-        $('.menu .num-button-container .num-button').each((index, elem) => {
+        $('.num-button-container .num-button').each((index, elem) => {
             const bind = $(elem).attr('ob-bind')
             $('.' + bind).removeClass(bind)
             $(elem).remove()
         })
-        $('.menu .num-button-container').html('')
+        $('.num-button-container').html('')
     }
 
     const initSlideButton = slide => {
@@ -100,8 +110,8 @@
         slide.find('.slide').each((index, elem) => {
             const id = 't' + (Date.now() * Math.random()).toFixed(0)
             $(elem).addClass(id)
-            $('.menu .num-button-container').append(`<div ob-duplicable="refreshSlideButton" ob-bind="${id}" class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
-            $('.menu .num-button').last().click(() => move_in_galery(slide, 0, index))
+            $('.num-button-container').append(`<div ob-duplicable="refreshSlideButton" ob-bind="${id}" class="num-button ${index === 0 ? "current" : ""}">${index + 1}</div>`)
+            $(`.num-button[ob-bind="${id}"]`).click(() => move_in_galery(slide, 0, index))
         })
     }
 
@@ -226,11 +236,14 @@
 
         const currentText = current.find('.content-text')
         if (!noText && currentText.length) {
-            setTextInMenu(currentText)
+            if ($('.mobile-menu').css('display') === 'block') {
+                setTextInSlide(current, currentText)
+            } else {
+                setTextInMenu(currentText)
+            }
         }
-
-        $('.menu .num-button.current').removeClass('current')
-        $($('.menu .num-button').get(index)).addClass('current')
+        $('.num-button.current').removeClass('current')
+        $(`.num-button[ob-bind="${Array.from(current.get(0).classList).find(_ => _[0] === 't')}"]`).addClass('current')
     }
 
     /**
@@ -267,7 +280,7 @@
 
     $('.slides').fadeOut(0)
 
-    $('.menu .logo').click(() => {
+    $('.logo').click(() => {
         showRow('realisation')
         showRea('.rea', 0)
         toggleMenu('atelier', true)

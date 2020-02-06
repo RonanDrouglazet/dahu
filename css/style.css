@@ -270,12 +270,12 @@ img.logo {
     right: 0;
 }
 
-.menu .num-button-container {
+.num-button-container {
     display: flex;
     margin-top: 20px;
 }
 
-.menu .num-button {
+.num-button {
     font-size: 14px;
     width: 20px;
     height: 20px;
@@ -287,15 +287,15 @@ img.logo {
     opacity: 1;
 }
 
-.menu .num-button:first-of-type {
+.num-button:first-of-type {
     margin: 0 5px 0 0;
 }
 
-.menu .num-button:hover {
+.num-button:hover {
     opacity: 0.8;
 }
 
-.menu .num-button.current {
+.num-button.current {
     border: 1px solid #888888;
 }
 
@@ -335,6 +335,10 @@ img.logo {
     margin-bottom: 5px;
 }
 
+.mobile-menu .menu-sub-container {
+    height: 19px;
+}
+
 .mobile-menu .menu-sub {
     font-size: 14px;
     line-height: 1;
@@ -353,9 +357,44 @@ img.logo {
     .main.container {
         padding-top: 100px;
     }
-
-    .slides {
-        top: 94px;
-        width: 100%;
+    .menu {
+        display: none;
     }
+    .slides {
+        top: 113px;
+        width: 100%;
+        overflow-y: auto;
+    }
+
+    .slides .slides-container,
+    .slides .bt {
+        height: 48%;
+    }
+
+    .row.equipe .slides .slides-container,
+    .row.equipe .slides .bt {
+        height: 65%;
+    }
+
+    .rea .description {
+        display: block;
+        padding: 10px;
+    }
+
+    .num-button-container {
+        justify-content: space-evenly;
+    }
+
+    .content > .row:not(.realisation) .slides > .content-text,
+    .content > .row:not(.realisation) > .content-text {
+        display: block;
+        padding: 20px;
+        text-align: left;
+    }
+
+    .content > .row.contact img {
+        height: 30px;
+    }
+
+
 }
