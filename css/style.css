@@ -395,7 +395,7 @@ img.logo {
 }
 
 @media (orientation: portrait) {
-    .content > .row:not(.realisation) img {
+    .content > .row:not(.realisation):not(.contact) img {
         height: auto;
     }
     .slides img {
