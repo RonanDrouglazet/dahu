@@ -350,8 +350,16 @@
     const rea = $(this)
     if (!rea.find('.slides').is(':visible')) {
       rea.find('.slides').fadeIn()
+      move_in_galery(rea, 0, 0)
       setTextInMenu(rea.find('.description'))
       initSlideButton(rea)
+      rea
+        .find('.slide img')
+        .get()
+        .forEach(
+          img =>
+            !img.getAttribute('src') && (img.src = img.getAttribute('data-img'))
+        )
     }
   })
 
@@ -378,7 +386,7 @@
   $('.showroom .logo').fadeOut(0)
   $('.showroom .logo').fadeIn(500)
 
-  if (top.location.hostname.match(/(octoboot\.ovh|localhost|sabo)/)) {
+  if (top.location.hostname.match(/(octoboot\.ovh|sabo)/)) {
     $('.slides .bt').hide()
   }
 
