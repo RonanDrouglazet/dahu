@@ -427,12 +427,7 @@
           const description = rea
             .find('.fixed-text p')
             .get()
-            .map(_ =>
-              _.innerHTML
-                .trim()
-                .replace(/\s{2,}/g, ' ')
-                .replace(/<br[a-z0-9-"= /]*>/gi, '\n')
-            )
+            .map(_ => _.innerHTML.trim().replace(/\s{2,}/g, ' '))
 
           const cats = {
             rea: 'architecture',
@@ -572,11 +567,7 @@
             ;(formIsCurrentlyDisplayed
               ? [dom, textInMenu]
               : [dom]
-            ).forEach(dom =>
-              dom
-                .find(`.fixed-text > :nth-child(${descNum})`)
-                .html(value.replace('\n', '<br/>'))
-            )
+            ).forEach(dom => dom.find(`.fixed-text > :nth-child(${descNum})`))
             break
 
           case 'vignette':
