@@ -503,7 +503,7 @@
                     <div class="num-button-container"></div>
                     <div class="description">
                         <h5></h5>
-                        <div class="fixed-text" style="font-size: 16px; margin-top: -10px;"></div>
+                        <p style="font-size: 16px;"></p>
                         <div class="fixed-text">
                           <p></p>
                           <p></p>
@@ -567,7 +567,9 @@
             ;(formIsCurrentlyDisplayed
               ? [dom, textInMenu]
               : [dom]
-            ).forEach(dom => dom.find(`.fixed-text > :nth-child(${descNum})`))
+            ).forEach(dom =>
+              dom.find(`.fixed-text > :nth-child(${descNum})`).html(value)
+            )
             break
 
           case 'vignette':
