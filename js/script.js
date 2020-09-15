@@ -386,7 +386,11 @@
   $('.showroom .logo').fadeOut(0)
   $('.showroom .logo').fadeIn(500)
 
-  if (top.location.hostname.match(/(octoboot\.ovh|sabo)/)) {
+  if (
+    location.href.match(
+      /(octoboot\.ovh|sabo.simple-acces.fr\/admin\/dahu\/sandbox)/
+    )
+  ) {
     $('.slides .bt').hide()
   }
 
