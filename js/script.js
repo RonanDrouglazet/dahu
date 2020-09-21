@@ -420,7 +420,7 @@
             .text()
             .trim()
           const vignette = rea.find('div > img').attr('src')
-          const gallerie = rea
+          const galerie = rea
             .find('.slides-container img')
             .get()
             .map(_ => $(_).attr('src'))
@@ -467,10 +467,10 @@
                 value: subtitle,
                 order: 3,
               },
-              gallerie: {
+              galerie: {
                 type: 'image',
                 multiple: true,
-                value: gallerie,
+                value: galerie,
                 order: 4,
               },
               description_1: {
@@ -541,7 +541,7 @@
           `.description.${idTextInMenu}`
         ).length
         const descNum = key.split('_').pop()
-        const gallerie = dom.find('.slides-container img')
+        const galerie = dom.find('.slides-container img')
         const cats = {
           mobilier: 'mob',
           installation: 'ins',
@@ -580,23 +580,23 @@
             dom.find('> div > img').attr('src', value)
             break
 
-          case 'gallerie':
-            for (let i = 0; i < Math.max(value.length, gallerie.length); i++) {
+          case 'galerie':
+            for (let i = 0; i < Math.max(value.length, galerie.length); i++) {
               if (
-                gallerie[i] &&
+                galerie[i] &&
                 value[i] &&
-                $(gallerie[i]).attr('src') !== value[i]
+                $(galerie[i]).attr('src') !== value[i]
               ) {
                 //replace
-                $(gallerie[i]).attr('src', value[i])
-              } else if (!gallerie[i] && value[i]) {
+                $(galerie[i]).attr('src', value[i])
+              } else if (!galerie[i] && value[i]) {
                 // add
                 dom
                   .find('.slides-container')
                   .append(`<div class="slide"><img src="${value[i]}" /></div>`)
-              } else if (gallerie[i] && !value[i]) {
+              } else if (galerie[i] && !value[i]) {
                 //remove
-                $(gallerie[i])
+                $(galerie[i])
                   .parent('.slide')
                   .remove()
               }
