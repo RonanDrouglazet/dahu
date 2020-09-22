@@ -1,4 +1,13 @@
 ;(function() {
+  const getId = element =>
+    element.getAttribute && element.getAttribute('data-sabo-id')
+  const getLastSaboId = document =>
+    [...document.querySelectorAll(`*[data-sabo-id]`)]
+      .map(getId)
+      .map(Number)
+      .filter(_ => !isNaN(_))
+      .sort((a, b) => (a > b ? 1 : -1))
+      .pop()
   // BACKGROUND management
   const $ = window.$
   const backgrounds = ['videos/gravure_bois.mp4']
@@ -137,7 +146,7 @@
           1}</div>`
       )
       const attrs = [
-        ['data-sabo-id', num],
+        ['data-sabo-id', getLastSaboId(document) + 1],
         ['data-sabo-editable', true],
         ['data-sabo-clone', 'cloneSlideButton'],
         ['data-sabo-remove', 'removeSlideButton'],
