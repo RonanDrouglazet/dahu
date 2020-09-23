@@ -421,6 +421,9 @@
       icon: 'mdi-account-multiple-plus',
       type: 'formList',
       listForms() {
+        if ($('.slides:visible').length) {
+          cleanSlides()
+        }
         const reas = Array.from(document.querySelectorAll('.rea'))
         return reas.map(_ => {
           const rea = $(_)
@@ -544,11 +547,6 @@
       },
       updateField(form, key, value) {
         const dom = $(form.dom)
-        const textInMenu = $('.menu .content-text')
-        const idTextInMenu = textInMenu.attr('ob-bind')
-        const formIsCurrentlyDisplayed = !!dom.find(
-          `.description.${idTextInMenu}`
-        ).length
         const descNum = key.split('_').pop()
         const galerie = dom.find('.slides-container img')
         const cats = {
@@ -561,28 +559,16 @@
           case 'titre':
             dom.find('.rea-overlay').text(value)
             dom.find('.description > :nth-child(2)').text(value)
-            if (formIsCurrentlyDisplayed) {
-              textInMenu.find('> :nth-child(2)').text(value)
-            }
             break
 
           case 'sous_titre':
             dom.find('.description > :nth-child(1)').text(value)
-            if (formIsCurrentlyDisplayed) {
-              textInMenu.find(':nth-child(1)').text(value)
-            }
             break
 
           case 'description_1':
           case 'description_2':
           case 'description_3':
-            // eslint-disable-next-line no-extra-semi
-            ;(formIsCurrentlyDisplayed
-              ? [dom, textInMenu]
-              : [dom]
-            ).forEach(dom =>
-              dom.find(`.fixed-text > :nth-child(${descNum})`).html(value)
-            )
+            dom.find(`.fixed-text > :nth-child(${descNum})`).html(value)
             break
 
           case 'vignette':
