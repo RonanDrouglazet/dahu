@@ -50,17 +50,21 @@ img.logo {
   cursor: pointer;
 }
 
-.showroom {
+.showroom,
+.showroom .bg {
   position: fixed;
   left: 0;
   top: 0;
   right: 0;
   bottom: 0;
-  background-color: #ffffff;
-  background-position: center;
-  background-size: cover;
+  background-color: #000000;
   z-index: 2;
   cursor: pointer;
+}
+
+.showroom .bg {
+  background-position: center;
+  background-size: cover;
 }
 
 .showroom video {
@@ -71,6 +75,7 @@ img.logo {
 
 .showroom .logo {
   position: fixed;
+  display: none;
 }
 
 .main.container {

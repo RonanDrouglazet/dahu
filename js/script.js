@@ -8,15 +8,40 @@
       .filter(_ => !isNaN(_))
       .sort((a, b) => (a > b ? 1 : -1))
       .pop()
+  function canUseWebP() {
+    var elem = document.createElement('canvas')
+    if (elem.getContext && elem.getContext('2d')) {
+      // was able or not to get WebP representation
+      return elem.toDataURL('image/webp').indexOf('data:image/webp') == 0
+    }
+    // very old browser like IE 8, canvas not supported
+    return false
+  }
   // BACKGROUND management
   const $ = window.$
-  const backgrounds = ['videos/gravure_bois.mp4']
+  const backgrounds = [
+    'images/IMG-6213.jpg',
+    'images/IMG_20180707_173805.jpg',
+    'images/IMG_2876-2.jpg',
+    'images/IMG_2699.jpg',
+    'images/IMG_2612.jpg',
+    'images/IMG_0656.jpg',
+    'images/20170309_104708.jpg',
+    'images/IMG_2568.jpg',
+    'images/IMG_1521.jpg',
+    'images/IMG_1528.jpg',
+  ]
   const bgToShow =
     backgrounds[Math.round(Math.random() * (backgrounds.length - 1))]
   if (bgToShow.match(/\.(jpg)$/)) {
-    $('.showroom').css('backgroundImage', `url(${bgToShow})`)
+    $('.showroom .bg').fadeOut(0)
+    $('.showroom .bg').css(
+      'backgroundImage',
+      `url(${canUseWebP() ? bgToShow.replace('jpg', 'webp') : bgToShow})`
+    )
+    $('.showroom .bg').fadeIn(500)
   } else {
-    $('.showroom').append(
+    $('.showroom .bg').append(
       `<video src="${bgToShow}" autoplay muted loop></video>`
     )
   }
@@ -351,6 +376,7 @@
     $('.showroom .logo').css({
       top: logoBlackOffset.top - scrollY,
       left: logoBlackOffset.left,
+      display: 'block',
     })
     $('.showroom .logo img').css('width', blackLogo.width() + 'px')
   }
